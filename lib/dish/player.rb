@@ -16,6 +16,10 @@ module Dish
       self.class.get "/players/#{self.username}"
     end
 
+    def method_missing(name)
+      profile[name.to_s].nil? ? super : profile[name.to_s]
+    end
+
   end
 
 end

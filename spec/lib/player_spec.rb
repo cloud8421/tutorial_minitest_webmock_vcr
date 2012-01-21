@@ -49,23 +49,16 @@ describe Dish::Player do
     end
 
     it "must get the right profile" do
-      player.profile
       player.profile["username"].must_equal "simplebits"
     end
 
     describe "dynamic attributes" do
 
-      it "must return no profile available if request not present" do
-        lambda { player.id }.must_raise NoResponseError
-      end
-
       it "must return the attribute value if present in profile" do
-        player.profile
-        player.id.must_equal "1"
+        player.id.must_equal 1
       end
 
       it "must raise method missing if attribute is not present" do
-        player.profile
         lambda { player.foo_attribute }.must_raise NoMethodError
       end
 
