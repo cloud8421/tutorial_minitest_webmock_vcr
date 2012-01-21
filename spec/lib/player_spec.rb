@@ -64,6 +64,25 @@ describe Dish::Player do
 
     end
 
+    describe "caching" do
+
+      # we use Webmock to disable the network connection after
+      # fetching the profile
+      before do
+        player.profile
+        stub_request(:any, /api.dribbble.com/).to_timeout
+      end
+
+      it "must cache the profile" do
+        player.profile.must_be_instance_of Hash
+      end
+
+      it "must refresh the profile if forced" do
+        lambda { player.profile(true) }.must_raise Timeout::Error
+      end
+
+    end
+
   end
 
 end

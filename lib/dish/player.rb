@@ -12,8 +12,8 @@ module Dish
       self.username = username
     end
 
-    def profile
-      self.class.get "/players/#{self.username}"
+    def profile(force = false)
+      force ? @profile = self.class.get("/players/#{self.username}") : @profile ||= self.class.get("/players/#{self.username}")
     end
 
     def method_missing(name)
