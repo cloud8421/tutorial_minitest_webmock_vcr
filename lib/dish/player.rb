@@ -13,11 +13,17 @@ module Dish
     end
 
     def profile(force = false)
-      force ? @profile = self.class.get("/players/#{self.username}") : @profile ||= self.class.get("/players/#{self.username}")
+      force ? @profile = get_profile : @profile ||= get_profile
     end
 
     def method_missing(name)
       profile[name.to_s].nil? ? super : profile[name.to_s]
+    end
+
+    private
+
+    def get_profile
+      self.class.get("/players/#{self.username}")
     end
 
   end
