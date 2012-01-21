@@ -16,6 +16,8 @@ describe Dish::Player do
 
   describe "GET profile" do
 
+    let(:player) { Dish::Player.new }
+
     before do
       VCR.insert_cassette 'base', :record => :new_episodes
     end
@@ -24,8 +26,12 @@ describe Dish::Player do
       VCR.eject_cassette
     end
 
-    it "records the fixture" do
-      Dish::Player.get('/players/simplebits')
+    it "must have a profile method" do
+      player.must_respond_to :profile
+    end
+
+    it "must parse the api response from JSON to Hash" do
+      player.profile.must_be_instance_of Hash
     end
 
   end
