@@ -19,11 +19,11 @@ describe Dish::Player do
     let(:player) { Dish::Player.new('simplebits') }
 
     it "must have an id attribute" do
-      player.must_respond_to :id
+      player.must_respond_to :username
     end
 
     it "must have the right id" do
-      player.id.must_equal 'simplebits'
+      player.username.must_equal 'simplebits'
     end
 
   end

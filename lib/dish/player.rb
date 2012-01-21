@@ -2,18 +2,18 @@ module Dish
 
   class Player
 
-    attr_accessor :id
+    attr_accessor :username
 
     include HTTParty
 
     base_uri 'http://api.dribbble.com'
 
-    def initialize(id)
-      self.id = id
+    def initialize(username)
+      self.username = username
     end
 
     def profile
-      self.class.get "/players/#{self.id}"
+      self.class.get "/players/#{self.username}"
     end
 
   end
