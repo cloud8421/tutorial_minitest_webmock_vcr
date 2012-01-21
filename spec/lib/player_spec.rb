@@ -14,4 +14,20 @@ describe Dish::Player do
 
   end
 
+  describe "GET profile" do
+
+    before do
+      VCR.insert_cassette 'base', :record => :new_episodes
+    end
+
+    after do
+      VCR.eject_cassette
+    end
+
+    it "records the fixture" do
+      Dish::Player.get('/players/simplebits')
+    end
+
+  end
+
 end
