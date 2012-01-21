@@ -9,7 +9,7 @@ describe Dish::Player do
     end
 
     it "must have the base url set to the Dribble API endpoint" do
-      Dish::Player.base_uri.must_equal 'http://api.dribbble.com/'
+      Dish::Player.base_uri.must_equal 'http://api.dribbble.com'
     end
 
   end
