@@ -16,17 +16,21 @@ describe Dish::Player do
 
   describe "default instance attributes" do
 
-    let(:player) { Dish::Player.new }
+    let(:player) { Dish::Player.new('simplebits') }
 
     it "must have an id attribute" do
       player.must_respond_to :id
+    end
+
+    it "must have the right id" do
+      player.id.must_equal 'simplebits'
     end
 
   end
 
   describe "GET profile" do
 
-    let(:player) { Dish::Player.new }
+    let(:player) { Dish::Player.new('simplebits') }
 
     before do
       VCR.insert_cassette 'base', :record => :new_episodes
@@ -42,6 +46,11 @@ describe Dish::Player do
 
     it "must parse the api response from JSON to Hash" do
       player.profile.must_be_instance_of Hash
+    end
+
+    it "must get the right profile" do
+      player.profile
+      player.profile["username"].must_equal "simplebits"
     end
 
   end
