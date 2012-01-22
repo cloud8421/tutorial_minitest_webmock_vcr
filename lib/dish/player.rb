@@ -17,7 +17,7 @@ module Dish
     end
 
     def method_missing(name)
-      profile[name.to_s].nil? ? super : profile[name.to_s]
+      profile.has_key?(name.to_s) ? profile[name.to_s] : super
     end
 
     private

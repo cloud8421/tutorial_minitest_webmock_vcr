@@ -55,7 +55,11 @@ describe Dish::Player do
     describe "dynamic attributes" do
 
       it "must return the attribute value if present in profile" do
-        player.id.must_equal 1
+        player.id.must_equal 1 #hardcoded, we know the data
+      end
+
+      it "must correctly return nil if the attribute is nil" do
+        player.drafted_by_player_id.must_be_nil
       end
 
       it "must raise method missing if attribute is not present" do
