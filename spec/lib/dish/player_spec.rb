@@ -1,8 +1,10 @@
-require_relative '../spec_helper'
+require_relative '../../spec_helper'
+# For Ruby < 1.9.3, use this instead of require_relative
+# require (File.expand_path('./../../../spec_helper', __FILE__))
 
 describe Dish::Player do
 
-  describe "default class attributes" do
+  describe "default attributes" do
 
     it "must include httparty methods" do
       Dish::Player.must_include HTTParty
@@ -13,7 +15,6 @@ describe Dish::Player do
     end
 
   end
-
   describe "default instance attributes" do
 
     let(:player) { Dish::Player.new('simplebits') }
@@ -51,15 +52,14 @@ describe Dish::Player do
     it "must get the right profile" do
       player.profile["username"].must_equal "simplebits"
     end
-
     describe "dynamic attributes" do
 
-      it "must return the attribute value if present in profile" do
-        player.id.must_equal 1 #hardcoded, we know the data
+      before do
+        player.profile
       end
 
-      it "must correctly return nil if the attribute is nil" do
-        player.drafted_by_player_id.must_be_nil
+      it "must return the attribute value if present in profile" do
+        player.id.must_equal 1
       end
 
       it "must raise method missing if attribute is not present" do
@@ -67,7 +67,6 @@ describe Dish::Player do
       end
 
     end
-
     describe "caching" do
 
       # we use Webmock to disable the network connection after
@@ -88,5 +87,4 @@ describe Dish::Player do
     end
 
   end
-
 end

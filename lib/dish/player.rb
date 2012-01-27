@@ -16,7 +16,7 @@ module Dish
       force ? @profile = get_profile : @profile ||= get_profile
     end
 
-    def method_missing(name)
+    def method_missing(name, *args, &block)
       profile.has_key?(name.to_s) ? profile[name.to_s] : super
     end
 
